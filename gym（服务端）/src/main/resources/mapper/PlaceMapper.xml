@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaoxie.gym.place.mapper.PlaceMapper" >
+  <resultMap id="BaseResultMap" type="com.xiaoxie.gym.place.pojo.Place" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="field_name" property="fieldName" jdbcType="VARCHAR" />
+    <result column="field_locale" property="fieldLocale" jdbcType="VARCHAR" />
+    <result column="field_time" property="fieldTime" jdbcType="VARCHAR" />
+    <result column="field_charge" property="fieldCharge" jdbcType="DOUBLE" />
+    <result column="field_managername" property="fieldManagername" jdbcType="VARCHAR" />
+    <result column="field_manegertel" property="fieldManegertel" jdbcType="VARCHAR" />
+    <result column="field_status" property="fieldStatus" jdbcType="INTEGER" />
+    <result column="delete_tag" property="deleteTag" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, field_name, field_locale, field_time, field_charge, field_managername, field_manegertel, 
+    field_status, delete_tag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xiaoxie.gym.place.pojo.PlaceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from place
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from place
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from place
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xiaoxie.gym.place.pojo.PlaceExample" >
+    delete from place
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xiaoxie.gym.place.pojo.Place" >
+    insert into place (id, field_name, field_locale, 
+      field_time, field_charge, field_managername, 
+      field_manegertel, field_status, delete_tag
+      )
+    values (#{id,jdbcType=INTEGER}, #{fieldName,jdbcType=VARCHAR}, #{fieldLocale,jdbcType=VARCHAR}, 
+      #{fieldTime,jdbcType=VARCHAR}, #{fieldCharge,jdbcType=DOUBLE}, #{fieldManagername,jdbcType=VARCHAR}, 
+      #{fieldManegertel,jdbcType=VARCHAR}, #{fieldStatus,jdbcType=INTEGER}, #{deleteTag,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaoxie.gym.place.pojo.Place" >
+    insert into place
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fieldName != null" >
+        field_name,
+      </if>
+      <if test="fieldLocale != null" >
+        field_locale,
+      </if>
+      <if test="fieldTime != null" >
+        field_time,
+      </if>
+      <if test="fieldCharge != null" >
+        field_charge,
+      </if>
+      <if test="fieldManagername != null" >
+        field_managername,
+      </if>
+      <if test="fieldManegertel != null" >
+        field_manegertel,
+      </if>
+      <if test="fieldStatus != null" >
+        field_status,
+      </if>
+      <if test="deleteTag != null" >
+        delete_tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fieldName != null" >
+        #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldLocale != null" >
+        #{fieldLocale,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldTime != null" >
+        #{fieldTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldCharge != null" >
+        #{fieldCharge,jdbcType=DOUBLE},
+      </if>
+      <if test="fieldManagername != null" >
+        #{fieldManagername,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldManegertel != null" >
+        #{fieldManegertel,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldStatus != null" >
+        #{fieldStatus,jdbcType=INTEGER},
+      </if>
+      <if test="deleteTag != null" >
+        #{deleteTag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xiaoxie.gym.place.pojo.PlaceExample" resultType="java.lang.Integer" >
+    select count(*) from place
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update place
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.fieldName != null" >
+        field_name = #{record.fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldLocale != null" >
+        field_locale = #{record.fieldLocale,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldTime != null" >
+        field_time = #{record.fieldTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldCharge != null" >
+        field_charge = #{record.fieldCharge,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fieldManagername != null" >
+        field_managername = #{record.fieldManagername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldManegertel != null" >
+        field_manegertel = #{record.fieldManegertel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldStatus != null" >
+        field_status = #{record.fieldStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleteTag != null" >
+        delete_tag = #{record.deleteTag,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update place
+    set id = #{record.id,jdbcType=INTEGER},
+      field_name = #{record.fieldName,jdbcType=VARCHAR},
+      field_locale = #{record.fieldLocale,jdbcType=VARCHAR},
+      field_time = #{record.fieldTime,jdbcType=VARCHAR},
+      field_charge = #{record.fieldCharge,jdbcType=DOUBLE},
+      field_managername = #{record.fieldManagername,jdbcType=VARCHAR},
+      field_manegertel = #{record.fieldManegertel,jdbcType=VARCHAR},
+      field_status = #{record.fieldStatus,jdbcType=INTEGER},
+      delete_tag = #{record.deleteTag,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaoxie.gym.place.pojo.Place" >
+    update place
+    <set >
+      <if test="fieldName != null" >
+        field_name = #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldLocale != null" >
+        field_locale = #{fieldLocale,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldTime != null" >
+        field_time = #{fieldTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldCharge != null" >
+        field_charge = #{fieldCharge,jdbcType=DOUBLE},
+      </if>
+      <if test="fieldManagername != null" >
+        field_managername = #{fieldManagername,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldManegertel != null" >
+        field_manegertel = #{fieldManegertel,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldStatus != null" >
+        field_status = #{fieldStatus,jdbcType=INTEGER},
+      </if>
+      <if test="deleteTag != null" >
+        delete_tag = #{deleteTag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaoxie.gym.place.pojo.Place" >
+    update place
+    set field_name = #{fieldName,jdbcType=VARCHAR},
+      field_locale = #{fieldLocale,jdbcType=VARCHAR},
+      field_time = #{fieldTime,jdbcType=VARCHAR},
+      field_charge = #{fieldCharge,jdbcType=DOUBLE},
+      field_managername = #{fieldManagername,jdbcType=VARCHAR},
+      field_manegertel = #{fieldManegertel,jdbcType=VARCHAR},
+      field_status = #{fieldStatus,jdbcType=INTEGER},
+      delete_tag = #{deleteTag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

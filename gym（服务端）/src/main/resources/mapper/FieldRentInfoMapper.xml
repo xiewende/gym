@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaoxie.gym.place.mapper.FieldRentInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.xiaoxie.gym.place.pojo.FieldRentInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="field_id" property="fieldId" jdbcType="INTEGER" />
+    <result column="tentUser_id" property="tentuserId" jdbcType="INTEGER" />
+    <result column="rent_data" property="rentData" jdbcType="DATE" />
+    <result column="rent_status" property="rentStatus" jdbcType="INTEGER" />
+    <result column="rent_type" property="rentType" jdbcType="INTEGER" />
+    <result column="rent_time" property="rentTime" jdbcType="VARCHAR" />
+    <result column="rent_begin" property="rentBegin" jdbcType="DATE" />
+    <result column="rent_end" property="rentEnd" jdbcType="DATE" />
+    <result column="rent_charge" property="rentCharge" jdbcType="DOUBLE" />
+    <result column="delete_tag" property="deleteTag" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, field_id, tentUser_id, rent_data, rent_status, rent_type, rent_time, rent_begin, 
+    rent_end, rent_charge, delete_tag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xiaoxie.gym.place.pojo.FieldRentInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from field_rent_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from field_rent_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from field_rent_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xiaoxie.gym.place.pojo.FieldRentInfoExample" >
+    delete from field_rent_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xiaoxie.gym.place.pojo.FieldRentInfo" >
+    insert into field_rent_info (id, field_id, tentUser_id, 
+      rent_data, rent_status, rent_type, 
+      rent_time, rent_begin, rent_end, 
+      rent_charge, delete_tag)
+    values (#{id,jdbcType=INTEGER}, #{fieldId,jdbcType=INTEGER}, #{tentuserId,jdbcType=INTEGER}, 
+      #{rentData,jdbcType=DATE}, #{rentStatus,jdbcType=INTEGER}, #{rentType,jdbcType=INTEGER}, 
+      #{rentTime,jdbcType=VARCHAR}, #{rentBegin,jdbcType=DATE}, #{rentEnd,jdbcType=DATE}, 
+      #{rentCharge,jdbcType=DOUBLE}, #{deleteTag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaoxie.gym.place.pojo.FieldRentInfo" >
+    insert into field_rent_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fieldId != null" >
+        field_id,
+      </if>
+      <if test="tentuserId != null" >
+        tentUser_id,
+      </if>
+      <if test="rentData != null" >
+        rent_data,
+      </if>
+      <if test="rentStatus != null" >
+        rent_status,
+      </if>
+      <if test="rentType != null" >
+        rent_type,
+      </if>
+      <if test="rentTime != null" >
+        rent_time,
+      </if>
+      <if test="rentBegin != null" >
+        rent_begin,
+      </if>
+      <if test="rentEnd != null" >
+        rent_end,
+      </if>
+      <if test="rentCharge != null" >
+        rent_charge,
+      </if>
+      <if test="deleteTag != null" >
+        delete_tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fieldId != null" >
+        #{fieldId,jdbcType=INTEGER},
+      </if>
+      <if test="tentuserId != null" >
+        #{tentuserId,jdbcType=INTEGER},
+      </if>
+      <if test="rentData != null" >
+        #{rentData,jdbcType=DATE},
+      </if>
+      <if test="rentStatus != null" >
+        #{rentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="rentType != null" >
+        #{rentType,jdbcType=INTEGER},
+      </if>
+      <if test="rentTime != null" >
+        #{rentTime,jdbcType=VARCHAR},
+      </if>
+      <if test="rentBegin != null" >
+        #{rentBegin,jdbcType=DATE},
+      </if>
+      <if test="rentEnd != null" >
+        #{rentEnd,jdbcType=DATE},
+      </if>
+      <if test="rentCharge != null" >
+        #{rentCharge,jdbcType=DOUBLE},
+      </if>
+      <if test="deleteTag != null" >
+        #{deleteTag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xiaoxie.gym.place.pojo.FieldRentInfoExample" resultType="java.lang.Integer" >
+    select count(*) from field_rent_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update field_rent_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.fieldId != null" >
+        field_id = #{record.fieldId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tentuserId != null" >
+        tentUser_id = #{record.tentuserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rentData != null" >
+        rent_data = #{record.rentData,jdbcType=DATE},
+      </if>
+      <if test="record.rentStatus != null" >
+        rent_status = #{record.rentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.rentType != null" >
+        rent_type = #{record.rentType,jdbcType=INTEGER},
+      </if>
+      <if test="record.rentTime != null" >
+        rent_time = #{record.rentTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rentBegin != null" >
+        rent_begin = #{record.rentBegin,jdbcType=DATE},
+      </if>
+      <if test="record.rentEnd != null" >
+        rent_end = #{record.rentEnd,jdbcType=DATE},
+      </if>
+      <if test="record.rentCharge != null" >
+        rent_charge = #{record.rentCharge,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deleteTag != null" >
+        delete_tag = #{record.deleteTag,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update field_rent_info
+    set id = #{record.id,jdbcType=INTEGER},
+      field_id = #{record.fieldId,jdbcType=INTEGER},
+      tentUser_id = #{record.tentuserId,jdbcType=INTEGER},
+      rent_data = #{record.rentData,jdbcType=DATE},
+      rent_status = #{record.rentStatus,jdbcType=INTEGER},
+      rent_type = #{record.rentType,jdbcType=INTEGER},
+      rent_time = #{record.rentTime,jdbcType=VARCHAR},
+      rent_begin = #{record.rentBegin,jdbcType=DATE},
+      rent_end = #{record.rentEnd,jdbcType=DATE},
+      rent_charge = #{record.rentCharge,jdbcType=DOUBLE},
+      delete_tag = #{record.deleteTag,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaoxie.gym.place.pojo.FieldRentInfo" >
+    update field_rent_info
+    <set >
+      <if test="fieldId != null" >
+        field_id = #{fieldId,jdbcType=INTEGER},
+      </if>
+      <if test="tentuserId != null" >
+        tentUser_id = #{tentuserId,jdbcType=INTEGER},
+      </if>
+      <if test="rentData != null" >
+        rent_data = #{rentData,jdbcType=DATE},
+      </if>
+      <if test="rentStatus != null" >
+        rent_status = #{rentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="rentType != null" >
+        rent_type = #{rentType,jdbcType=INTEGER},
+      </if>
+      <if test="rentTime != null" >
+        rent_time = #{rentTime,jdbcType=VARCHAR},
+      </if>
+      <if test="rentBegin != null" >
+        rent_begin = #{rentBegin,jdbcType=DATE},
+      </if>
+      <if test="rentEnd != null" >
+        rent_end = #{rentEnd,jdbcType=DATE},
+      </if>
+      <if test="rentCharge != null" >
+        rent_charge = #{rentCharge,jdbcType=DOUBLE},
+      </if>
+      <if test="deleteTag != null" >
+        delete_tag = #{deleteTag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaoxie.gym.place.pojo.FieldRentInfo" >
+    update field_rent_info
+    set field_id = #{fieldId,jdbcType=INTEGER},
+      tentUser_id = #{tentuserId,jdbcType=INTEGER},
+      rent_data = #{rentData,jdbcType=DATE},
+      rent_status = #{rentStatus,jdbcType=INTEGER},
+      rent_type = #{rentType,jdbcType=INTEGER},
+      rent_time = #{rentTime,jdbcType=VARCHAR},
+      rent_begin = #{rentBegin,jdbcType=DATE},
+      rent_end = #{rentEnd,jdbcType=DATE},
+      rent_charge = #{rentCharge,jdbcType=DOUBLE},
+      delete_tag = #{deleteTag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
